@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer Surprise</title>
+    <style>
+        @font-face {
+            font-family: 'MineCrafter';
+            src: url('MineCrafter.Alt.ttf') format('truetype'); /* Asegúrate de tener este archivo en la misma carpeta */
+        }
+        @font-face {
+            font-family: 'Play Pretend';
+            src: url('PlayPretend.ttf') format('truetype'); /* Asegúrate de tener este archivo en la misma carpeta */
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #initialScreen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .inputText {
+            font-size: 24px;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        .button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-size: 24px;
+            color: white;
+            background-color: red;
+            border: 3px solid yellow;
+            cursor: pointer;
+        }
+        #trophy {
+            display: none;
+            text-align: center;
+            position: relative;
+            top: 20vh;
+        }
+        #trophy img {
+            max-width: 50%;
+            height: auto;
+        }
+        #trophyText {
+            font-size: 48px;
+            font-family: 'MineCrafter', 'Play Pretend', cursive;
+        }
+        #options {
+            display: none;
+            text-align: center;
+            position: relative;
+            top: 30vh;
+        }
+        #optionsTitle {
+            font-size: 48px;
+            font-family: 'MineCrafter', 'Play Pretend', cursive;
+            margin-bottom: 20px;
+        }
+        .option {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 24px;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            border: 3px solid yellow;
+            font-family: 'MineCrafter', 'Play Pretend', cursive;
+        }
+        #finalMessage {
+            display: none;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'MineCrafter', 'Play Pretend', cursive;
+            z-index: 1001; /* Asegura que el mensaje final esté sobre los fuegos artificiales */
+        }
+        .fireworks {
+            display: none; /* Inicialmente oculto */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: url('fireworks.gif') no-repeat center center;
+            background-size: cover;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="initialScreen">
+        <div>¿Quién eres? Ingresa tu nombre</div>
+        <input type="text" id="nameInput" class="inputText" placeholder="Tu nombre">
+        <button class="button" onclick="saveName()">Guardar</button>
+    </div>
+    <div id="trophy">
+        <img src="trophy.png" alt="Trophy">
+        <div id="trophyText"></div>
+        <button class="button" onclick="showOptions()">Siguiente</button>
+    </div>
+    <div id="options">
+        <div id="optionsTitle">¡Ganaste un premio! Elige una opción</div>
+        <div class="option" onclick="showResult('Has ganado 20.000 monedas')">Elige este</div>
+        <div class="option" onclick="showResult('Has ganado un juego')">Elige este</div>
+        <div class="option" onclick="showResult('El próximo año será mejor')">Elige este</div>
+    </div>
+    <div id="finalMessage">
+        <div id="resultText"></div>
+        <div id="gamerDay">¡Feliz día del gamer!</div>
+    </div>
+    <div id="fireworks" class="fireworks"></div>
+
+    <script>
+        let playerName = '';
+
+        function saveName() {
+            playerName = document.getElementById('nameInput').value || 'Gamer';
+            document.getElementById('initialScreen').style.display = 'none';
+            document.getElementById('trophyText').innerText = playerName + ', eres el mejor gamer del mundo';
+            document.getElementById('trophy').style.display = 'block';
+        }
+
+        function showOptions() {
+            document.getElementById('trophy').style.display = 'none';
+            document.getElementById('options').style.display = 'block';
+        }
+
+        function showResult(result) {
+            document.getElementById('options').style.display = 'none';
+            document.getElementById('finalMessage').style.display = 'block';
+            document.getElementById('resultText').innerText = result;
+            document.getElementById('fireworks').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+         
